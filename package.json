@@ -1,7 +1,13 @@
 {
   "name": "remarkdown-plugin-tweet-share",
   "version": "1.0.0",
-  "main": "index.js",
+  "types": "dist/main.d.ts",
+  "exports": {
+    "import": "./dist/main.esm.js",
+    "require": "./dist/main.js",
+    "node": "./dist/main.js",
+    "default": "./dist/main.js"
+  },
   "repository": "https://github.com/Shinyaigeek/remarkdown-plugin-tweet-share.git",
   "author": "shinyaigeek <PhilisPaxil@gmail.com>",
   "license": "MIT",
@@ -13,7 +19,7 @@
     "test:runner": "jest",
     "test": "yarn test:runner",
     "build": "bili --format cjs --format esm && yarn build:types",
-    "build:types": "tsc -d --out-dir dist"
+    "build:types": "tsc -d --outDir dist"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
