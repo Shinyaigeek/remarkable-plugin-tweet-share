@@ -11,7 +11,9 @@
     "postpublish": "pinst --enable",
     "lint:staged": "lint-staged",
     "test:runner": "jest",
-    "test": "yarn test:runner"
+    "test": "yarn test:runner",
+    "build": "bili --format cjs --format esm && yarn build:types",
+    "build:types": "tsc -d --out-dir dist"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
