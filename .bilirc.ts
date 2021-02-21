@@ -1,7 +1,7 @@
 import { Config } from "bili";
 
 const config: Config = {
-  input: "src/index.js",
+  input: "src/main.ts",
 };
 
 export default config;
