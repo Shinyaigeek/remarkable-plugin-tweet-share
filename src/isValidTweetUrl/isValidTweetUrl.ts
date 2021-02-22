@@ -11,6 +11,6 @@ export const isValidTweetUrl = (
   const urlObj = new URL(url);
   const { pathname } = urlObj;
   const paths = pathname.split("");
-  // check only url is https://twitter.com/hoge/bar
-  return paths.length > 1;
+  // check only url is https://twitter.com/hoge/bar/tweetid
+  return paths.length > 2;
 };

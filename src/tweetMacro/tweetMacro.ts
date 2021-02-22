@@ -5,6 +5,7 @@ import Remarkable, {
   LinkOpenToken,
   LinkToken,
 } from "remarkable/lib";
+import { isValidTweetUrl } from "../isValidTweetUrl/isValidTweetUrl";
 import { peek } from "../peek/peek";
 
 export const tokenizeTweetMacro = (
@@ -102,7 +103,11 @@ export const tokenizeTweetMacro = (
 
   const href = state.src.slice(hrefStart, hrefEnd);
 
-  const tweetUrl = new URL(href).pathname.split("/")[3];
+  if (!isValidTweetUrl(href)) {
+    throw new Error("tweet url is invalid");
+  }
+
+  const tweetId = new URL(href).pathname.split("/")[3];
 
   state.push({
     type: "link_open",
@@ -112,7 +117,7 @@ export const tokenizeTweetMacro = (
 
   state.push({
     type: "image",
-    src: `https://tweet2image.vercel.app/${tweetUrl}.jpg`,
+    src: `https://tweet2image.vercel.app/${tweetId}.jpg`,
     alt: label,
     level: state.level++,
   } as ImageToken);
