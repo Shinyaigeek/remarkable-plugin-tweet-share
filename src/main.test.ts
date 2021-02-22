@@ -52,4 +52,20 @@ describe("remarkdown-plugin-tweet-share", () => {
 <p>!tweet[</p>
 `);
   });
+
+  test("parse !tweet alt", () => {
+    const src = `## h2
+### h3
+
+!tweet[ここはalt](https://twitter.com/Shinyaigeek/status/1363426871950536705?s=20)
+`;
+
+    const md = new Remarkable();
+    md.use(tweetMacroPlugin)
+    console.log(md.render(src))
+    expect(md.render(src)).toEqual(`<h2>h2</h2>
+<h3>h3</h3>
+<p><a href="https://twitter.com/Shinyaigeek/status/1363426871950536705?s=20"><img src="https://tweet2image.vercel.app/1363426871950536705.jpg" alt="ここはalt"></a></p>
+`);
+  });
 });
