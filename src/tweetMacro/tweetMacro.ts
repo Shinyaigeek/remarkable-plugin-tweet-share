@@ -8,10 +8,7 @@ import Remarkable, {
 import { isValidTweetUrl } from "../isValidTweetUrl/isValidTweetUrl";
 import { peek } from "../peek/peek";
 
-export const tokenizeTweetMacro = (
-  state: Remarkable.StateInline,
-  silent: boolean
-): boolean => {
+export const tokenizeTweetMacro = (state: Remarkable.StateInline): boolean => {
   const start = state.pos;
   let marker = state.src.charCodeAt(start);
   const max = state.posMax;
