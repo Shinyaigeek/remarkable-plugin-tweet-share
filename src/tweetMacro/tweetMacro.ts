@@ -11,23 +11,25 @@ export const tokenizeTweetMacro = (
   state: Remarkable.StateInline,
   silent: boolean
 ): boolean => {
-  let max = state.posMax,
-    start = state.pos,
-    marker = state.src.charCodeAt(start);
+  const start = state.pos;
+  let marker = state.src.charCodeAt(start);
+  const max = state.posMax;
 
   if (peek(state.src, start, 6) !== "!tweet") {
+    state.pos = start;
     return false;
   }
   state.pos += 6;
   marker = state.src.charCodeAt(state.pos);
 
   if (marker !== 0x5b /* [ */) {
+    state.pos = start;
     return false;
   }
 
-  let level = 1;
+  let labelLevel = 1;
 
-  let found = false;
+  let labelFound = false;
 
   state.pos++;
 
@@ -36,11 +38,11 @@ export const tokenizeTweetMacro = (
   while (state.pos < max) {
     marker = state.src.charCodeAt(state.pos);
     if (marker === 0x5b /* [ */) {
-      level++;
+      labelLevel++;
     } else if (marker === 0x5d /* ] */) {
-      level--;
-      if (level === 0) {
-        found = true;
+      labelLevel--;
+      if (labelLevel === 0) {
+        labelFound = true;
         break;
       }
     }
@@ -48,7 +50,8 @@ export const tokenizeTweetMacro = (
     state.pos++;
   }
 
-  if (!found) {
+  if (!labelFound) {
+    state.pos = start;
     return false;
   }
 
@@ -61,12 +64,13 @@ export const tokenizeTweetMacro = (
     state.src.charCodeAt(state.pos) !== 0x28
     /* ( */
   ) {
+    state.pos = start;
     return false;
   }
 
-  level = 1;
+  let hrefLevel = 1;
 
-  found = false;
+  let hrefFound = false;
 
   state.pos++;
 
@@ -75,11 +79,11 @@ export const tokenizeTweetMacro = (
   while (state.pos < max) {
     marker = state.src.charCodeAt(state.pos);
     if (marker === 0x28 /* ( */) {
-      level++;
+      hrefLevel++;
     } else if (marker === 0x29 /* ) */) {
-      level--;
-      if (level === 0) {
-        found = true;
+      hrefLevel--;
+      if (hrefLevel === 0) {
+        hrefFound = true;
         break;
       }
     }
@@ -87,7 +91,8 @@ export const tokenizeTweetMacro = (
     state.pos++;
   }
 
-  if (!found) {
+  if (!hrefFound) {
+    state.pos = start;
     return false;
   }
 
