@@ -68,5 +68,15 @@
   },
   "dependencies": {
     "rollup-plugin-typescript2": "^0.30.0"
-  }
+  },
+  "keywords": [
+    "remarkable",
+    "remarkable-plugin",
+    "Twitter",
+    "tweet",
+    "markdown",
+    "plugin",
+    "parser",
+    "md"
+  ]
 }
