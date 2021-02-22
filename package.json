@@ -1,26 +1,33 @@
 {
-  "name": "remarkdown-plugin-tweet-share",
+  "name": "remarkable-plugin-tweet-share",
   "version": "1.0.0",
   "types": "dist/main.d.ts",
   "exports": {
-    "import": "./dist/main.esm.js",
-    "require": "./dist/main.js",
-    "node": "./dist/main.js",
-    "default": "./dist/main.js"
+    "import": "./dist/main.esm.min.js",
+    "require": "./dist/main.min.js",
+    "node": "./dist/main.min.js",
+    "default": "./dist/main.min.js"
   },
-  "repository": "https://github.com/Shinyaigeek/remarkdown-plugin-tweet-share.git",
+  "repository": "https://github.com/Shinyaigeek/remarkable-plugin-tweet-share.git",
   "author": "shinyaigeek <PhilisPaxil@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "_husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
     "lint:staged": "lint-staged",
     "test:runner": "jest",
     "test": "yarn test:runner",
-    "build": "bili --format cjs --format esm && yarn build:types",
+    "build": "bili --format cjs-min --format esm-min && yarn build:types",
     "build:types": "tsc -d --outDir dist"
   },
+  "files": [
+    "dist",
+    "package.json",
+    "yarn.lock",
+    "LICENSE",
+    "tsconfig.json"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@types/remarkable": "^2.0.1",
