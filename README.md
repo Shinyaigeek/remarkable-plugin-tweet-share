@@ -29,6 +29,8 @@ and rendered as
 
 ## Usage
 
+`!tweet[img's alt](tweet url)`
+
 ```cli
 yarn add remarkable-plugin-tweet-share remarkable -D
 ```
